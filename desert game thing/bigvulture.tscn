@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://bigvulture.gltf" type="PackedScene" id=1]
+[ext_resource path="res://rocktex2.material" type="Material" id=2]
+
+[node name="bigvulture" instance=ExtResource( 1 )]
+
+[node name="bigvulture" parent="." index="0"]
+transform = Transform( 1, 0, 0, 0, 0.876274, 0.289088, 0, -0.481813, 0.525764, 0, -729.925, -1005.66 )
+material/0 = ExtResource( 2 )

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/maintheme_dontuse.mp3-d2a39bb3e5b59cdcd9efc522c08ea2bc.mp3str"
+
+[deps]
+
+source_file="res://audio/maintheme_dontuse.mp3"
+dest_files=[ "res://.import/maintheme_dontuse.mp3-d2a39bb3e5b59cdcd9efc522c08ea2bc.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

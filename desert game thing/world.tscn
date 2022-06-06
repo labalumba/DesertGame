@@ -1,0 +1,318 @@
+[gd_scene load_steps=22 format=2]
+
+[ext_resource path="res://groundtextest.tscn" type="PackedScene" id=1]
+[ext_resource path="res://player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Pause.gd" type="Script" id=3]
+[ext_resource path="res://spawn.gd" type="Script" id=4]
+[ext_resource path="res://stairs.tscn" type="PackedScene" id=5]
+[ext_resource path="res://uitheme.tres" type="Theme" id=6]
+[ext_resource path="res://audio/1L.ogg" type="AudioStream" id=7]
+[ext_resource path="res://audio/1R.ogg" type="AudioStream" id=8]
+[ext_resource path="res://audio/2L.ogg" type="AudioStream" id=9]
+[ext_resource path="res://audio/2R.ogg" type="AudioStream" id=10]
+[ext_resource path="res://vultures.tscn" type="PackedScene" id=11]
+[ext_resource path="res://bigvulture.tscn" type="PackedScene" id=12]
+[ext_resource path="res://gatedive.tscn" type="PackedScene" id=13]
+[ext_resource path="res://gate.tscn" type="PackedScene" id=14]
+[ext_resource path="res://redglow.material" type="Material" id=15]
+[ext_resource path="res://rough.phymat" type="PhysicsMaterial" id=16]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="BoxShape" id=3]
+
+[sub_resource type="CubeMesh" id=4]
+
+[sub_resource type="CubeMesh" id=5]
+
+[node name="World" type="Spatial"]
+pause_mode = 1
+script = ExtResource( 4 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 1, 0, 0, 0, -0.766044, 0.642788, 0, -0.642788, -0.766044, 0, 0, 0 )
+light_energy = 2.55
+shadow_enabled = true
+directional_shadow_normal_bias = 1.07
+directional_shadow_max_distance = 259.4
+
+[node name="Ground" parent="." instance=ExtResource( 1 )]
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.068, -95.98, -52.502 )
+
+[node name="Camera" parent="Player/CollisionShape" index="0"]
+transform = Transform( 1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, -0.001, 0.000999451, -1.4 )
+
+[node name="Pause" type="Node2D" parent="."]
+pause_mode = 2
+position = Vector2( 640, 360 )
+script = ExtResource( 3 )
+
+[node name="Control" type="Control" parent="Pause"]
+margin_right = 40.0
+margin_bottom = 40.0
+theme = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="pauseMenu" type="ColorRect" parent="Pause/Control"]
+margin_left = -100.0
+margin_top = -100.0
+margin_right = 100.0
+margin_bottom = 100.0
+color = Color( 0, 0, 0, 0.882353 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="optionsButton" type="Button" parent="Pause/Control/pauseMenu"]
+margin_top = 90.0
+margin_right = 200.0
+margin_bottom = 110.0
+custom_styles/pressed = SubResource( 1 )
+custom_styles/focus = SubResource( 2 )
+text = "OPTIONS"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="exitButton" type="Button" parent="Pause/Control/pauseMenu"]
+margin_top = 150.0
+margin_right = 200.0
+margin_bottom = 170.0
+custom_styles/pressed = SubResource( 1 )
+custom_styles/focus = SubResource( 2 )
+text = "EXIT"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="resumeButton" type="Button" parent="Pause/Control/pauseMenu"]
+margin_top = 30.0
+margin_right = 200.0
+margin_bottom = 50.0
+custom_styles/pressed = SubResource( 1 )
+custom_styles/focus = SubResource( 2 )
+text = "RESUME"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="optionsMenu" type="ColorRect" parent="Pause/Control"]
+visible = false
+margin_left = -100.0
+margin_top = -100.0
+margin_right = 100.0
+margin_bottom = 100.0
+color = Color( 0, 0, 0, 0.882353 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="backButton" type="Button" parent="Pause/Control/optionsMenu"]
+margin_top = 150.0
+margin_right = 200.0
+margin_bottom = 170.0
+custom_styles/pressed = SubResource( 1 )
+custom_styles/focus = SubResource( 2 )
+text = "BACK"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SpinBox" type="SpinBox" parent="Pause/Control/optionsMenu"]
+margin_left = 130.0
+margin_top = 87.0
+margin_right = 194.0
+margin_bottom = 116.479
+step = 0.1
+value = 15.0
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Pause/Control/optionsMenu"]
+margin_left = 10.0
+margin_top = 94.0
+margin_right = 40.0
+margin_bottom = 14.0
+text = "MOUSE SENSITIVITY:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="Pause/Control/optionsMenu"]
+margin_left = 10.0
+margin_top = 33.0
+margin_right = 38.0
+margin_bottom = 14.0
+text = "MASTER VOLUME:"
+
+[node name="SpinBox2" type="SpinBox" parent="Pause/Control/optionsMenu"]
+margin_left = 130.0
+margin_top = 26.0
+margin_right = 194.0
+margin_bottom = 55.0
+value = 100.0
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Spawn" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0691425, -95.9459, -52.5221 )
+
+[node name="Spawn2" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.069, -1800, -52.522 )
+
+[node name="vultureTele1" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -303.915, 154.185, 676.546 )
+
+[node name="stairs" parent="." instance=ExtResource( 5 )]
+transform = Transform( -0.499825, 0.000107143, 0.866126, 0.0711765, 0.996622, 0.0409514, -0.863196, 0.0821164, -0.498145, -311.469, -13.0473, 652.954 )
+
+[node name="RigidBody" type="RigidBody" parent="stairs"]
+transform = Transform( -0.999312, -0.00238933, 0.0369631, 0.00831123, 0.957998, 0.286638, -0.03609, 0.286747, -0.957326, 1.32404, 101.711, -3.21985 )
+mass = 0.17
+physics_material_override = ExtResource( 16 )
+continuous_cd = true
+sleeping = true
+linear_damp = 0.5
+angular_damp = 1.2
+
+[node name="CollisionShape" type="CollisionShape" parent="stairs/RigidBody"]
+shape = SubResource( 3 )
+
+[node name="MeshInstance" type="MeshInstance" parent="stairs/RigidBody"]
+transform = Transform( 1, -5.96046e-08, 0, 1.93715e-07, 1, 0, -8.9407e-08, 4.17233e-07, 1, 0, 0, 0 )
+mesh = SubResource( 4 )
+material/0 = ExtResource( 15 )
+
+[node name="Red" parent="." instance=ExtResource( 14 )]
+transform = Transform( 0.574605, 0.00890841, -0.818383, -0.073756, 0.996436, -0.0409391, 0.815101, 0.0838844, 0.573214, 656.225, 14.6657, 115.81 )
+
+[node name="goalRed" type="MeshInstance" parent="Red"]
+transform = Transform( 0.510465, -0.319733, 0.798246, 0.254954, 0.942834, 0.214609, -0.821232, 0.0939665, 0.562802, 67.5388, -49.2833, -639.768 )
+mesh = SubResource( 5 )
+material/0 = ExtResource( 15 )
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1490.68, 73.3516, 0 )
+stream = ExtResource( 7 )
+attenuation_model = 1
+unit_db = -1.0
+unit_size = 25.0
+
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.388673, 1864.78 )
+stream = ExtResource( 8 )
+attenuation_model = 1
+unit_db = -1.0
+unit_size = 25.0
+
+[node name="AudioStreamPlayer3D3" type="AudioStreamPlayer3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1560.21, 0.388673, 0 )
+stream = ExtResource( 9 )
+attenuation_model = 1
+unit_db = -1.0
+unit_size = 25.0
+
+[node name="AudioStreamPlayer3D4" type="AudioStreamPlayer3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.388673, -1631.47 )
+stream = ExtResource( 10 )
+attenuation_model = 1
+unit_db = -1.0
+unit_size = 25.0
+
+[node name="vultures" parent="." instance=ExtResource( 11 )]
+transform = Transform( -3.91415, 0, 0.82427, 0, 4, 0, -0.82427, 0, -3.91415, 0.04, 0, -52.004 )
+
+[node name="bigvulture" parent="." instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 38.8724 )
+
+[node name="rigidbodytest" type="Spatial" parent="."]
+transform = Transform( 1, -2.23517e-08, -2.98023e-08, 6.03497e-07, 0.999999, -3.72529e-08, -1.46031e-06, -2.83122e-07, 1, -299.927, 207.829, 682.541 )
+visible = false
+
+[node name="RigidBody5" type="RigidBody" parent="rigidbodytest"]
+transform = Transform( 1, -1.33227e-15, 0, -5.4401e-14, 1, 3.55271e-15, -1.13687e-13, 0, 1, 0, 4.26111, 0 )
+mass = 0.17
+
+[node name="CollisionShape" type="CollisionShape" parent="rigidbodytest/RigidBody5"]
+shape = SubResource( 3 )
+
+[node name="MeshInstance" type="MeshInstance" parent="rigidbodytest/RigidBody5"]
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="RigidBody4" type="RigidBody" parent="rigidbodytest"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.47287, 0 )
+mass = 0.17
+
+[node name="CollisionShape" type="CollisionShape" parent="rigidbodytest/RigidBody4"]
+shape = SubResource( 3 )
+
+[node name="MeshInstance" type="MeshInstance" parent="rigidbodytest/RigidBody4"]
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="RigidBody3" type="RigidBody" parent="rigidbodytest"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.05474, 0 )
+mass = 0.17
+
+[node name="CollisionShape" type="CollisionShape" parent="rigidbodytest/RigidBody3"]
+shape = SubResource( 3 )
+
+[node name="MeshInstance" type="MeshInstance" parent="rigidbodytest/RigidBody3"]
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="RigidBody2" type="RigidBody" parent="rigidbodytest"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.78327, 0 )
+mass = 0.17
+
+[node name="CollisionShape" type="CollisionShape" parent="rigidbodytest/RigidBody2"]
+shape = SubResource( 3 )
+
+[node name="MeshInstance" type="MeshInstance" parent="rigidbodytest/RigidBody2"]
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="gates" type="Spatial" parent="."]
+
+[node name="gate" parent="gates" instance=ExtResource( 14 )]
+transform = Transform( 0.988056, -0.153634, -0.0118431, 0.15409, 0.985134, 0.0759403, 0, -0.0768582, 0.997042, 0, -54.2492, -351.539 )
+
+[node name="gate2" parent="gates" instance=ExtResource( 14 )]
+transform = Transform( 0.995453, -0.0949733, -0.00732113, 0.095255, 0.992509, 0.0765088, 0, -0.0768582, 0.997042, 0, -31.6449, -510.155 )
+
+[node name="gate3" parent="gates" instance=ExtResource( 14 )]
+transform = Transform( 0.999568, -0.0292828, -0.0022573, 0.0293696, 0.996612, 0.076825, 0, -0.0768582, 0.997042, 0, -52.8281, -872.953 )
+
+[node name="gate5" parent="gates" instance=ExtResource( 14 )]
+transform = Transform( 0.999941, 0.0107714, 0.000830329, -0.0108034, 0.996984, 0.0768537, 0, -0.0768582, 0.997042, 0, -28.4181, -1284.74 )
+visible = false
+
+[node name="gate4" parent="gates" instance=ExtResource( 14 )]
+transform = Transform( 0.999568, -0.0292828, -0.0022573, 0.0110192, 0.302674, 0.95303, -0.0272241, -0.952644, 0.302866, 0.57139, -100.983, -1307.63 )
+
+[node name="gatedive" parent="gates" instance=ExtResource( 13 )]
+transform = Transform( -0.99983, 0.0119957, 0.013964, 0.0104773, 0.994507, -0.104142, -0.0151366, -0.103978, -0.994464, -0.252242, -30.0652, -1284.03 )
+
+[connection signal="pressed" from="Pause/Control/pauseMenu/optionsButton" to="Pause" method="_on_Button2_pressed"]
+[connection signal="pressed" from="Pause/Control/pauseMenu/exitButton" to="Pause" method="_on_Button_pressed"]
+[connection signal="pressed" from="Pause/Control/pauseMenu/resumeButton" to="Pause" method="_on_resumeButton_pressed"]
+[connection signal="pressed" from="Pause/Control/optionsMenu/backButton" to="Pause" method="_on_backButton_pressed"]
+[connection signal="value_changed" from="Pause/Control/optionsMenu/SpinBox" to="Player" method="_on_SpinBox_value_changed"]
+[connection signal="value_changed" from="Pause/Control/optionsMenu/SpinBox2" to="Player" method="_on_SpinBox2_value_changed"]
+
+[editable path="Player"]
